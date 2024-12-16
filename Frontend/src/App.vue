@@ -1,30 +1,50 @@
 <template>
-  <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </nav>
-  <router-view />
+  <div id="app">
+    <header-component></header-component>
+    <main>
+      <router-view></router-view> <!-- This renders the active route -->
+    </main>
+    <footer-component></footer-component>
+  </div>
 </template>
 
+<script>
+import HeaderComponent from './components/HeaderComponent.vue';
+import FooterComponent from './components/FooterComponent.vue';
+
+export default {
+  name: 'App',
+  components: {
+    HeaderComponent,
+    FooterComponent,
+  },
+};
+</script>
+
 <style>
+/* Ensuring that the body and html take the full height */
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+/* Flexbox to make sure the page uses full height */
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+  display: flex;
+  flex-direction: column;
+  height: 100%; /* Allow the app to fill the full page height */
 }
 
-nav {
-  padding: 30px;
+main {
+  flex: 1; /* This will make sure the main content grows and uses available space */
+  padding: 20px;
+  overflow-y: auto; /* Allow scrolling if content overflows */
 }
 
-nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-nav a.router-link-exact-active {
-  color: #42b983;
+footer-component {
+  flex-shrink: 0; /* Ensure footer doesn't shrink */
 }
 </style>

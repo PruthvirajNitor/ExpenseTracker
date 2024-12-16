@@ -1,18 +1,22 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js App" />
-  </div>
-</template>
-
-<script>
-// @ is an alias to /src
-import HelloWorld from "@/components/HelloWorld.vue";
-
-export default {
-  name: "HomeView",
-  components: {
-    HelloWorld,
-  },
-};
-</script>
+    <div>
+      
+      <main>
+        <h1>Welcome to the Expense Tracker</h1>
+        <p>Track your expenses efficiently. Please log in or register to begin.</p>
+      </main>
+    </div>
+  </template>
+  
+  <script>
+  
+  </script>
+  
+  <style scoped>
+  main {
+    text-align: center;
+    margin-top: 2rem;
+    font-family: Arial, sans-serif;
+  }
+  </style>
+  
