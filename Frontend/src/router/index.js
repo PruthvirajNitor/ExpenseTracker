@@ -1,7 +1,9 @@
-import { createRouter, createWebHashHistory } from "vue-router";
+import { createRouter, createWebHistory } from "vue-router";
 import HomeView from "../views/HomeView.vue";
-import RegisterPage from "../views/RegisterPage.vue"
-import LoginPage from "@/views/LoginPage.vue";
+import RegisterPage from "../views/RegisterForm.vue"
+import LoginPage from "@/views/LoginForm.vue";
+import ExpenseList from "@/views/ExpenseList.vue";
+import AddExpense from "@/views/AddExpense.vue";
 
 const routes = [
   {
@@ -19,10 +21,20 @@ const routes = [
     name: "login",
     component: LoginPage
   },
+  {
+    path: "/expenseList",
+    name: "expense-list",
+    component: ExpenseList
+  },
+  {
+    path: "/addExpense",
+    name: "add-expense",
+    component: AddExpense
+  }
 ];
 
 const router = createRouter({
-  history: createWebHashHistory(),
+  history: createWebHistory(),
   routes,
 });
 

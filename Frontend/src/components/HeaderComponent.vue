@@ -10,37 +10,31 @@
         <li v-if="!isLoggedIn"><router-link to="/login">Login</router-link></li>
         <li v-if="!isLoggedIn"><router-link to="/register">Register</router-link></li>
 
-        <!-- Show Expense List, Reports, Logout when logged in -->
-        <li v-if="isLoggedIn"><router-link to="/expenses">Expense List</router-link></li>
+        <!-- Show Expense List, Add Expense, Reports, Logout when logged in -->
+        <li v-if="isLoggedIn"><router-link to="/expenseList">Expense List</router-link></li>
+        <li v-if="isLoggedIn"><router-link to="/addExpense">Add Expense</router-link></li>
         <li v-if="isLoggedIn"><router-link to="/reports">Reports</router-link></li>
-        <li v-if="isLoggedIn"><a href="#" @click="logout">Logout</a></li>
+        <li v-if="isLoggedIn"><a href="#" @click.prevent="handleLogout">Logout</a></li>
       </ul>
     </nav>
   </header>
 </template>
 
 <script>
+import { mapGetters, mapActions } from 'vuex';
+
 export default {
   name: 'HeaderComponent',
-  data() {
-    return {
-      isLoggedIn: false, // Initially not logged in
-    };
+  computed: {
+    ...mapGetters(['isLoggedIn']), // Dynamically fetch the login status from Vuex
   },
   methods: {
-    logout() {
-      // Handle logout
-      localStorage.removeItem('token'); // Clear any login token
-      this.isLoggedIn = false;
-      this.$router.push('/'); // Redirect to Home
+    ...mapActions(['logoutUser']), // Map the logout action from Vuex
+
+    async handleLogout() {
+      await this.logoutUser(); // Perform logout action
+      this.$router.push('/'); // Redirect to home route after logout
     },
-  },
-  created() {
-    // Check login state
-    const token = localStorage.getItem('token');
-    if (token) {
-      this.isLoggedIn = true;
-    }
   },
 };
 </script>
@@ -48,7 +42,7 @@ export default {
 <style scoped>
 /* Header styling */
 .app-header {
-  background-color: #333; /* Attractive green background */
+  background-color: #333;
   color: white;
   padding: 1rem;
   display: flex;
@@ -89,6 +83,6 @@ nav ul li {
 }
 
 nav ul li:hover {
-  transform: scale(1.1); /* Slight zoom effect when hovering over menu items */
+  transform: scale(1.1);
 }
 </style>

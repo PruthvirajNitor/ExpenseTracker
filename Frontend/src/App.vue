@@ -2,7 +2,7 @@
   <div id="app">
     <header-component></header-component>
     <main>
-      <router-view></router-view> <!-- This renders the active route -->
+      <router-view :key="$route.fullPath"></router-view> <!-- This renders the active route -->
     </main>
     <footer-component></footer-component>
   </div>
@@ -14,6 +14,11 @@ import FooterComponent from './components/FooterComponent.vue';
 
 export default {
   name: 'App',
+  created() {
+    // Dispatch the action to check if the user is already logged in
+    this.$store.dispatch('checkLoginState');
+    // this.$forceUpdate(); 
+  },
   components: {
     HeaderComponent,
     FooterComponent,
