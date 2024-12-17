@@ -1,62 +1,53 @@
 <template>
   <div class="register-form">
     <h2>Register</h2>
-    <form @submit.prevent="registerUser">
-  
+    <form @submit.prevent="submitRegisterForm">
       <div class="form-group">
         <label for="name">Name:</label>
-        <input type="text" id="name" v-model="form.name" required />
+        <input type="text" id="name" v-model="form.userName" required />
       </div>
-  
       <div class="form-group">
         <label for="phone">Phone Number:</label>
-        <input type="tel" id="phone" v-model="form.phone" required />
+        <input type="tel" id="phone" v-model="form.phoneNumber" required />
       </div>
-  
       <div class="form-group">
         <label for="email">Email:</label>
         <input type="email" id="email" v-model="form.email" required />
       </div>
-  
       <div class="form-group">
         <label for="password">Password:</label>
         <input type="password" id="password" v-model="form.password" required />
       </div>
-  
       <button type="submit">Register</button>
     </form>
   </div>
 </template>
 
 <script>
-import axios from 'axios';
+import { mapActions } from 'vuex';
 
 export default {
-  name: "RegisterForm",
+  name: 'RegisterForm',
   data() {
     return {
       form: {
-        name: "",
-        phone: "",
-        email: "",
-        password: "",
+        userName: '',
+        phoneNumber: '',
+        email: '',
+        password: '',
       },
     };
   },
   methods: {
-    async registerUser() {
-      try {
-        const response = await axios.post("http://localhost:8080/user", this.form);
-        alert("Registration Successful!");
-        console.log(response.data);
-      } catch (error) {
-        console.error("Error while registering user:", error);
-        alert("Registration failed. Please try again.");
-      }
+    ...mapActions(['registerUser']), // Maps Vuex action 'registerUser' to this.registerUser
+    submitRegisterForm() {
+      // Call Vuex action
+      this.registerUser(this.form);
     },
   },
 };
 </script>
+
 
 <style scoped>
 .register-form {
