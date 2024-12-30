@@ -3,22 +3,31 @@ import axios from 'axios';
 
 export default createStore({
   state: {
-    user: null, // Stores the logged-in user's data
-    expenses: [], // To store list of expenses
+    user: null, 
+    expenses: [], 
   },
 
   mutations: {
     SET_USER(state, user) {
-      state.user = user; // Set the user object in Vuex state
+      state.user = user; 
     },
     CLEAR_USER(state) {
-      state.user = null; // Clear user data from Vuex state
+      state.user = null; 
     },
     ADD_EXPENSE(state, expense) {
-      state.expenses.push(expense); // Add expense to state
+      state.expenses.push(expense); 
     },
     SET_EXPENSE(state, expenses) {
-      state.expenses = expenses; // Replace expense list in state
+      state.expenses = expenses; 
+    },
+    UPDATE_EXPENSE(state, updatedExpense) {
+      const index = state.expenses.findIndex(expense => expense.id === updatedExpense.id);
+      if (index !== -1) {
+        state.expenses.splice(index, 1, updatedExpense);
+      }
+    },
+    DELETE_EXPENSE(state, expenseId) {
+      state.expenses = state.expenses.filter(expense => expense.id !== expenseId);
     },
   },
 
@@ -33,7 +42,6 @@ export default createStore({
         const user = response.data;
         commit('SET_USER', user);
 
-        // Store user in localStorage
         localStorage.setItem('user', JSON.stringify(user));
 
         console.log("Logged in user:", user);
@@ -46,7 +54,7 @@ export default createStore({
 
     logoutUser({ commit }) {
       commit('CLEAR_USER');
-      localStorage.removeItem('user'); // Clear user from localStorage
+      localStorage.removeItem('user'); 
       alert('Logged out successfully.');
     },
 
@@ -54,7 +62,7 @@ export default createStore({
       const user = localStorage.getItem('user');
       if (user) {
         try {
-          commit('SET_USER', JSON.parse(user)); // Parse and set user from localStorage
+          commit('SET_USER', JSON.parse(user)); 
         } catch (error) {
           console.error('Error parsing user data from localStorage:', error);
         }
@@ -80,10 +88,45 @@ export default createStore({
         console.log(response.data);
         commit("SET_USER",userData);
         commit('CLEAR_USER');
-        // Optionally, handle immediate login after registration
+        
       } catch (error) {
         console.error('Error while registering user:', error);
         alert('Registration failed. Please try again.');
+      }
+    },
+
+
+    async updateExpense({ commit }, expense) {
+      try {
+        const response = await axios.put(`http://localhost:8080/expenses/${expense.id}`, expense);
+        commit('UPDATE_EXPENSE', response.data);
+      } catch (error) {
+        console.error('Error updating expense:', error);
+      }
+    },
+
+    async fetchExpenses({ commit }) {
+      try {
+        const user = JSON.parse(localStorage.getItem('user'));
+        if (user && user.id) {
+          const response = await axios.get(`http://localhost:8080/expense/user/${user.id}`);
+          commit('SET_EXPENSE', response.data);
+        }
+      } catch (error) {
+        console.error('Error fetching expenses:', error);
+      }
+    },
+  
+    async deleteExpense({ commit, state }, expenseId) {
+      try {
+        const userId = state.user?.id;
+        if (!userId) throw new Error('User not logged in.');
+  
+        await axios.delete(`http://localhost:8080/expense/${expenseId}`);
+        
+        commit('SET_EXPENSE', state.expenses.filter(expense => expense.id !== expenseId));
+      } catch (error) {
+        console.error('Error deleting expense:', error);
       }
     },
     
@@ -92,13 +135,13 @@ export default createStore({
 
   getters: {
     isLoggedIn(state) {
-      return !!state.user; // Determine login status based on user presence
+      return !!state.user; 
     },
     currentUser(state) {
-      return state.user; // Return user object
+      return state.user; 
     },
     getExpenses(state) {
-      return state.expenses; // Return expense list
+      return state.expenses; 
     },
   },
 });

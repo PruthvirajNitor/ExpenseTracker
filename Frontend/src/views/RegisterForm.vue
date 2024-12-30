@@ -39,9 +39,9 @@ export default {
     };
   },
   methods: {
-    ...mapActions(['registerUser']), // Maps Vuex action 'registerUser' to this.registerUser
+    ...mapActions(['registerUser']),
     submitRegisterForm() {
-      // Call Vuex action
+      
       this.registerUser(this.form);
     },
   },

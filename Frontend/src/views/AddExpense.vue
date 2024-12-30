@@ -42,19 +42,19 @@ export default {
       expense: {
         title: '',
         amount: 0,
-        category: 'FOOD', // Default category
+        category: 'FOOD',
         date: '',
       },
     };
   },
   computed: {
-    // Get user data from Vuex store
+    
     ...mapState(['user']),
   },
   methods: {
-    ...mapActions(['addExpense']), // Map the addExpense action from Vuex
+    ...mapActions(['addExpense']), 
     async submitExpenseForm() {
-      // Check if user data is available
+      
       if (!this.user || !this.user.id) {
         alert('You must be logged in to add an expense.');
         return;
@@ -63,19 +63,19 @@ export default {
       console.log("Form data: ",this.expense);
       
 
-      // Prepare expense data with userId
+      
       const expenseData = {
         ...this.expense,
-        userId: this.user.id, // Assign the user ID from Vuex store
+        userId: this.user.id, 
       };
 
-      // Call the Vuex action to add the expense
+      
       const response = await this.addExpense(expenseData);
 
       console.log("Added expense: ",response );
       
 
-      // Optionally, redirect to the expenses page after adding the expense
+      
       this.$router.push('/expenseList');
 
       console.log("Form submitted");
@@ -86,7 +86,7 @@ export default {
 </script>
 
 <style scoped>
-/* Styling for the form */
+
 .add-expense-form {
   max-width: 450px;
   margin: 50px auto;

@@ -4,6 +4,7 @@ import RegisterPage from "../views/RegisterForm.vue"
 import LoginPage from "@/views/LoginForm.vue";
 import ExpenseList from "@/views/ExpenseList.vue";
 import AddExpense from "@/views/AddExpense.vue";
+import EditExpense from "@/views/EditExpense.vue";
 
 const routes = [
   {
@@ -30,7 +31,12 @@ const routes = [
     path: "/addExpense",
     name: "add-expense",
     component: AddExpense
-  }
+  },
+  {
+    path: '/editExpense',
+    name: 'AddExpenseForm', 
+    component: EditExpense,
+  },
 ];
 
 const router = createRouter({

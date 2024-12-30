@@ -15,9 +15,9 @@ import FooterComponent from './components/FooterComponent.vue';
 export default {
   name: 'App',
   created() {
-    // Dispatch the action to check if the user is already logged in
+   
     this.$store.dispatch('checkLoginState');
-    // this.$forceUpdate(); 
+     
   },
   components: {
     HeaderComponent,
@@ -27,7 +27,7 @@ export default {
 </script>
 
 <style>
-/* Ensuring that the body and html take the full height */
+
 html, body {
   margin: 0;
   padding: 0;
@@ -36,20 +36,20 @@ html, body {
   box-sizing: border-box;
 }
 
-/* Flexbox to make sure the page uses full height */
+
 #app {
   display: flex;
   flex-direction: column;
-  height: 100%; /* Allow the app to fill the full page height */
+  height: 100%; 
 }
 
 main {
-  flex: 1; /* This will make sure the main content grows and uses available space */
+  flex: 1; 
   padding: 20px;
-  overflow-y: auto; /* Allow scrolling if content overflows */
+  overflow-y: auto; 
 }
 
 footer-component {
-  flex-shrink: 0; /* Ensure footer doesn't shrink */
+  flex-shrink: 0; 
 }
 </style>

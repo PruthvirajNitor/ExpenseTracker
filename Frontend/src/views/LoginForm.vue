@@ -29,14 +29,14 @@ export default {
     };
   },
   methods: {
-    ...mapActions(['loginUser']), // Map Vuex action
+    ...mapActions(['loginUser']), 
     async submitLoginForm() {
       console.log("Calling vuex loginUser");
       
-      await this.loginUser(this.form); // Call Vuex action for login
+      await this.loginUser(this.form);
 
-      // After login is successful, redirect to dashboard
-      this.$router.push('/expenseList'); // Redirect to the dashboard or any other route
+      
+      this.$router.push('/expenseList'); 
     },
   },
 };

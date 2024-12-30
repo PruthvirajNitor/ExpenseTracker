@@ -26,21 +26,20 @@ import { mapGetters, mapActions } from 'vuex';
 export default {
   name: 'HeaderComponent',
   computed: {
-    ...mapGetters(['isLoggedIn']), // Dynamically fetch the login status from Vuex
+    ...mapGetters(['isLoggedIn']), 
   },
   methods: {
-    ...mapActions(['logoutUser']), // Map the logout action from Vuex
-
+    ...mapActions(['logoutUser']), 
     async handleLogout() {
-      await this.logoutUser(); // Perform logout action
-      this.$router.push('/'); // Redirect to home route after logout
+      await this.logoutUser();
+      this.$router.push('/'); 
     },
   },
 };
 </script>
 
 <style scoped>
-/* Header styling */
+
 .app-header {
   background-color: #333;
   color: white;
@@ -74,7 +73,7 @@ nav a {
 }
 
 nav a:hover {
-  color: #f8f8f8; /* Lighter color on hover */
+  color: #f8f8f8; 
   text-decoration: underline;
 }
 
