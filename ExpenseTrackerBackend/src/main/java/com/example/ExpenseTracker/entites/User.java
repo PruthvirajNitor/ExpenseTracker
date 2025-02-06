@@ -5,14 +5,17 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 
 import java.util.List;
 
+@Entity
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "users")
+@Data //generates getters setters equals and hashcode
 public class User {
 
     @Id
@@ -33,7 +36,8 @@ public class User {
     @Pattern(regexp = "^\\d{10}$",message = "Phone number must contain 10 digits")
     private String phoneNumber;
 
-    @OneToMany(mappedBy = "users",cascade = CascadeType.ALL,fetch = FetchType.LAZY) //
+    @OneToMany(mappedBy = "users",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    //mapped by says this is a parent component and user maintains the relationship. Cascade says that if user is droped corresponding expenses should be dropped too.Expenses are loaded only when they are accessed
     @JsonManagedReference
     private List<Expense> expenses;
 }
