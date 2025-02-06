@@ -1,0 +1,30 @@
+Expense Tracker Application 
+
+Dependencies : 
+
+-BE: jpa, web , Lombok, validate , swagger ,web ,devtools
+-FE: axios, vuex , chart.js, vue-router, bootstrap
+
+
+>Steps 
+- Entities
+- API design 
+- Service layer
+- Login and Signup page 
+
+
+
+
+> JAVA 
+
+- 
+
+
+
+> GIT 
+
+- step 1 : git add .
+- step 2 : git commit -m "message"
+- step 3 : git push origin branch-name
+
+- Naming convention : Use feature/login-system. 
