@@ -35,4 +35,44 @@ public class User extends BaseEntity {
     //mapped by says this is a parent component and user maintains the relationship. Cascade says that if user is droped corresponding expenses should be dropped too.Expenses are loaded only when they are accessed
     @JsonManagedReference
     private List<Expense> expenses;
+
+    public @NotBlank(message = "Username cannot blank") String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(@NotBlank(message = "Username cannot blank") String userName) {
+        this.userName = userName;
+    }
+
+    public @NotBlank(message = "Password cannot be blank") @Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$", message = "Password must contain at least one lowercase, uppercase, number and character") String getPassword() {
+        return password;
+    }
+
+    public void setPassword(@NotBlank(message = "Password cannot be blank") @Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$", message = "Password must contain at least one lowercase, uppercase, number and character") String password) {
+        this.password = password;
+    }
+
+    public @NotBlank(message = "email cannot be blank") String getEmail() {
+        return email;
+    }
+
+    public void setEmail(@NotBlank(message = "email cannot be blank") String email) {
+        this.email = email;
+    }
+
+    public @NonNull @Pattern(regexp = "^\\d{10}$", message = "Phone number must contain 10 digits") String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(@NonNull @Pattern(regexp = "^\\d{10}$", message = "Phone number must contain 10 digits") String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public List<Expense> getExpenses() {
+        return expenses;
+    }
+
+    public void setExpenses(List<Expense> expenses) {
+        this.expenses = expenses;
+    }
 }
