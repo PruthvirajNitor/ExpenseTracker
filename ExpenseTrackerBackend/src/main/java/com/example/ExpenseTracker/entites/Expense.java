@@ -40,4 +40,52 @@ public class Expense extends BaseEntity {
     @Enumerated(EnumType.STRING) //saved in database as a string and not ordinal
     private Category category;
     private LocalDate day;
+
+    public @NotEmpty(message = "Title cannot be empty or null") @Size(max = 255, message = "title cannot be more than 255 characters") String getTitle() {
+        return title;
+    }
+
+    public void setTitle(@NotEmpty(message = "Title cannot be empty or null") @Size(max = 255, message = "title cannot be more than 255 characters") String title) {
+        this.title = title;
+    }
+
+    public @NotNull @Positive(message = "Amount cannot be negative") Double getAmount() {
+        return amount;
+    }
+
+    public void setAmount(@NotNull @Positive(message = "Amount cannot be negative") Double amount) {
+        this.amount = amount;
+    }
+
+    public @NotNull @Positive(message = "Available Balance cannot be negative") Double getAvailBal() {
+        return availBal;
+    }
+
+    public void setAvailBal(@NotNull @Positive(message = "Available Balance cannot be negative") Double availBal) {
+        this.availBal = availBal;
+    }
+
+    public @NotNull Double getLowerLimit() {
+        return lowerLimit;
+    }
+
+    public void setLowerLimit(@NotNull Double lowerLimit) {
+        this.lowerLimit = lowerLimit;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
+    public LocalDate getDay() {
+        return day;
+    }
+
+    public void setDay(LocalDate day) {
+        this.day = day;
+    }
 }
