@@ -12,7 +12,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @Data
 public class AddExpenseDTO {
-
+    
     private String title;
     private Double amount;
     private Category category;
