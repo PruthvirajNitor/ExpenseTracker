@@ -15,6 +15,8 @@ public class RegisterDTO {
     private String email;
     private String password;
     private String phoneNumber;
+    private Double availBal;
+    private Double lowerLimit;
 
     public String getUserName() {
         return userName;
@@ -46,5 +48,21 @@ public class RegisterDTO {
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
+    }
+
+    public Double getAvailBal() {
+        return availBal;
+    }
+
+    public void setAvailBal(Double availBal) {
+        this.availBal = availBal;
+    }
+
+    public Double getLowerLimit() {
+        return lowerLimit;
+    }
+
+    public void setLowerLimit(Double lowerLimit) {
+        this.lowerLimit = lowerLimit;
     }
 }

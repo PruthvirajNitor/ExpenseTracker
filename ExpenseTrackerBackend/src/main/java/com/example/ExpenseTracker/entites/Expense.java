@@ -54,7 +54,7 @@ public class Expense extends BaseEntity {
     public void setAmount(@NotNull @Positive(message = "Amount cannot be negative") Double amount) {
         this.amount = amount;
     }
-    
+
     public Category getCategory() {
         return category;
     }
