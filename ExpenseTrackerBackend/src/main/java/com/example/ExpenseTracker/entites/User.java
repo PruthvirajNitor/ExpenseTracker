@@ -3,7 +3,9 @@ package com.example.ExpenseTracker.entites;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Positive;
 import lombok.*;
 
 import java.util.List;
@@ -31,7 +33,15 @@ public class User extends BaseEntity {
     @Pattern(regexp = "^\\d{10}$",message = "Phone number must contain 10 digits")
     private String phoneNumber;
 
-    @OneToMany(mappedBy = "users",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @NotNull
+    @Positive(message = "Available Balance cannot be negative")
+    private Double availBal; //Used to set the budget
+
+
+    @NotNull
+    private Double lowerLimit; //used to notify the user
+
+    @OneToMany(mappedBy = "user",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     //mapped by says this is a parent component and user maintains the relationship. Cascade says that if user is droped corresponding expenses should be dropped too.Expenses are loaded only when they are accessed
     @JsonManagedReference
     private List<Expense> expenses;
@@ -74,5 +84,21 @@ public class User extends BaseEntity {
 
     public void setExpenses(List<Expense> expenses) {
         this.expenses = expenses;
+    }
+
+    public @NotNull @Positive(message = "Available Balance cannot be negative") Double getAvailBal() {
+        return availBal;
+    }
+
+    public void setAvailBal(@NotNull @Positive(message = "Available Balance cannot be negative") Double availBal) {
+        this.availBal = availBal;
+    }
+
+    public @NotNull Double getLowerLimit() {
+        return lowerLimit;
+    }
+
+    public void setLowerLimit(@NotNull Double lowerLimit) {
+        this.lowerLimit = lowerLimit;
     }
 }
